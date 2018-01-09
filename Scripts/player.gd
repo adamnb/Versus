@@ -1,4 +1,4 @@
-	extends KinematicBody2D
+extends KinematicBody2D
 
 var spt # Child sprite object
 
@@ -55,6 +55,7 @@ func _fixed_process(dT):
 	var x = get_pos().x
 	var y = get_pos().y
 	
+	
 	#HORIZONTAL KINEMATICS
 	if (Input.is_action_pressed(str(ctpf[control_m]) + "left")):
 		#spt.set_flip_h(true)
@@ -82,12 +83,16 @@ func _fixed_process(dT):
 
 	move_and_slide(Vector2(speed, y_vel)) # The normal move() function would create too much friction
 	
+	if health <= 0:
+		queue_free()
+	
+	
 # PAIN AND SUFFERING
 func hurt(damage, dir, punch):
 	health -= damage
-	move (Vector2(dir * punch, 0))
+	#move (Vector2(dir * punch, 0))
 	
-	print (get_name(), " Took ", damage, " and now has ", health, " health.")
+	print (get_name(), " Took ", damage, " damage and now has ", health, " health.")
 
 
 # Colliders & Triggers

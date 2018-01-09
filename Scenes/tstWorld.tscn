@@ -29,22 +29,18 @@ __meta__ = {
 [node name="Player0" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 73, 118 )
-enabled = true
 def_spd = 70
 gravity = 8.0
 jumpVel = 150.0
 ex_jumps = 1
-max_health = 100
 
 [node name="Player1" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 212.962, 140.921 )
-enabled = true
 control_m = 1
 def_spd = 70
 gravity = 8.0
 jumpVel = 150.0
 ex_jumps = 1
-max_health = 100
 
 

@@ -2,7 +2,10 @@ extends KinematicBody2D
 
 export var force = 100.0 # For RigidBody2D only. Delete when settled
 export var speed = 10
-export var dir   = 1 # Horizontal Direction
+var dir          = 1 # Horizontal Direction
+
+export var damage = 12.5
+export var punch  = 1
 
 var res = Vector2(Globals.get("display/width"), Globals.get("display/height"))
 
@@ -27,5 +30,10 @@ func _fixed_process(dT):
 		queue_free()
 		
 func _on_body_enter (body):
+
+	if body.get_script() != null:
+		if 'health' in body: # Check if health variable is in collision body script. ( Really hacky way of verifying a script. I don't know of any other way :[ )
+			body.hurt(damage, dir, punch)
+			
 	get_parent().queue_free()
 	
