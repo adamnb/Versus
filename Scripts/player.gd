@@ -90,9 +90,9 @@ func _fixed_process(dT):
 # PAIN AND SUFFERING
 func hurt(damage, dir, punch):
 	health -= damage
-	#move (Vector2(dir * punch, 0))
-	
-	print (get_name(), " Took ", damage, " damage and now has ", health, " health.")
+	move (Vector2(dir * punch, 0))
+	spt.blink(0.1)
+	print (get_name(), " took ", damage, " damage and now has ", health, " health.")
 
 
 # Colliders & Triggers

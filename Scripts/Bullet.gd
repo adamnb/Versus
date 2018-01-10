@@ -4,7 +4,7 @@ export var force = 100.0 # For RigidBody2D only. Delete when settled
 export var speed = 10
 var dir          = 1 # Horizontal Direction
 
-export var damage = 12.5
+export var damage = 12.5		
 export var punch  = 1
 
 var res = Vector2(Globals.get("display/width"), Globals.get("display/height"))
