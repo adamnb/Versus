@@ -1,8 +1,7 @@
 extends Sprite
 
-var duration  # The amout of frames a flash will be displayed. Set with flash() func
-var cur_f = 0 # Current elapsed frames since assigned texture
-var flashing = false
+var duration = 0.0  # The amout of frames a flash will be displayed. Set with flash() func
+#var cur_f = 0 # Current elapsed frames since assigned texture
 
 # An array of all the gun flash textures
 var flashes =  [preload("res://Textures/gunflash0.tex"), 
@@ -23,17 +22,16 @@ func _process(dT):
 	x = get_global_pos().x
 	y = get_global_pos().y
 	
-	if flashing:
+	if duration > 0:
+		duration -= dT
 		set_texture(cur_tex)
-		cur_f += 1
-	
-	if cur_f == duration:
-		flashing = false
+		
+	else:
+		duration = 0
 		set_texture(null)
+		
 	
 func flash(dur):
 	duration = dur # Set requested duration
 	cur_tex = flashes[rand_range(0, flashes.size())] # Set the texture to a random flash
-	flashing = true 
-	cur_f = 0 # Reset timer
 	

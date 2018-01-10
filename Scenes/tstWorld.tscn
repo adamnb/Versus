@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Tilesets/Prototileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefab_Scenes/Player0.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/simpleUI.gd" type="Script" id=3]
 
 [node name="World" type="Node"]
 
@@ -26,7 +27,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player0" parent="." instance=ExtResource( 2 )]
+[node name="Players" type="Node" parent="."]
+
+[node name="Player0" parent="Players" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 73, 118 )
 def_spd = 70
@@ -34,7 +37,7 @@ gravity = 8.0
 jumpVel = 150.0
 ex_jumps = 1
 
-[node name="Player1" parent="." instance=ExtResource( 2 )]
+[node name="Player1" parent="Players" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 212.962, 140.921 )
 control_m = 1
@@ -42,5 +45,12 @@ def_spd = 70
 gravity = 8.0
 jumpVel = 150.0
 ex_jumps = 1
+
+[node name="CustomDraw" type="Node2D" parent="."]
+
+script/script = ExtResource( 3 )
+height = -6
+width = 10
+x_offset = 4
 
 

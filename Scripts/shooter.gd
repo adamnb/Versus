@@ -43,4 +43,4 @@ func _input(e): # Run only when input is recieved
 		
 		cur_ammo -= 1
 		
-		flash_spt.flash(3)
+		flash_spt.flash(0.05) # Muzzle flash
