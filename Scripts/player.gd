@@ -26,7 +26,7 @@ export var ex_jump_vel = 1.0
 
 # Status
 # -> HEALTH
-export() var health
+export() var health   = 100
 export var max_health = 100 
 
 

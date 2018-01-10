@@ -11,12 +11,13 @@ func _ready():
 	
 func _process(dT):
 	if duration > 0:
-		duration -= dT
+		# Count down and set sprite to flash
+		duration -= dT 
 		set_texture(blink_spt)
 	
-	else:
+	else: # Time runs out
 		duration = 0
-		set_texture(def_spt)
+		set_texture(def_spt) # Return to regular sprite
 
 func blink (dur):
 	duration = dur
