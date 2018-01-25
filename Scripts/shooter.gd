@@ -30,8 +30,9 @@ func _process(dT):
 		dir = -1
 	if p_dir == 1:
 		dir = 1
-	
-	flash_spt.set_texture(null)
+		
+	if flash_spt:
+		flash_spt.set_texture(null)
 	
 	if cur_ammo > 0:
 		if (cur_t <= 0): # Chambered
@@ -44,7 +45,8 @@ func _process(dT):
 				
 				cur_ammo -= 1
 				
-				flash_spt.flash(0.05) # Muzzle flash
+				if flash_spt:
+					flash_spt.flash(0.05) # Muzzle flash
 				
 				cur_t = chamber_dur
 	
@@ -52,9 +54,3 @@ func _process(dT):
 		cur_t -= dT
 	else:
 		cur_t = 0
-	
-	
-	
-func _input(e): # Run only when input is recieved
-
-	
