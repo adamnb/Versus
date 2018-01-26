@@ -15,10 +15,12 @@ func _ready():
 			respawns.append(r)
 
 	print ("[PLAYER MANAGER] Initialized with ", players.size(), " players")
+	print ("[PLAYER MANAGER] Initialized with ", respawns.size(), " spawnpoints")
 	print ("[PLAYER MANAGER] Players: ", players)
 	
-	set_process(true)
 	
+	set_process(true)
+
 func _process(dT):
 	if respawn_queue.size() > 0:
 		#print ("[PLAYER MANAGER] ", respawn_queue)
@@ -27,11 +29,11 @@ func _process(dT):
 			p[1] -= dT
 			
 			if p[1] <= 0:
-				print ("[PLAYER MANAGER] ", respawn_queue)
 				
-				var nP = p[0].instance()
-				add_child(nP)
-				nP.set_pos(respawns[0])
+				var nP = p[0]
+				print ("")
+				get_parent().add_child(nP)
+				nP.set_pos(Vector2(respawns[0].get_pos().x, respawns[0].get_pos().y))
 	
 func respawn (player):
 	print ("[PLAYER MANAGER] I was asked to respawn ", player.get_name(), " but I don't like him and I'm stupid so I wont.")

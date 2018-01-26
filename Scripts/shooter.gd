@@ -37,7 +37,9 @@ func _process(dT):
 	if cur_ammo > 0:
 		if (cur_t <= 0): # Chambered
 			if (Input.is_action_pressed(str(ctpf[control_m]) + "fire")):
+				print ("[SHOOTER] ", proj.get_type())
 				var nShot = proj.instance() # Create clone instance
+				print ("[SHOOTER] ", nShot.get_type())
 				get_parent().get_parent().get_parent().add_child(nShot) # Add to tree
 				nShot.get_child(0).set_pos(get_global_pos()) # Reposition
 				
