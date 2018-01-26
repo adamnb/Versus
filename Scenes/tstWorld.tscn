@@ -31,7 +31,7 @@ __meta__ = {
 [node name="Players" type="Node" parent="."]
 
 script/script = ExtResource( 2 )
-respawn_time = 2
+respawn_time = 5
 
 [node name="Bichael" parent="Players" instance=ExtResource( 3 )]
 
@@ -58,5 +58,9 @@ height = -5
 width = 8
 x_offset = 3
 thickness = 1.0
+
+[node name="Respawn" type="Position2D" parent="."]
+
+transform/pos = Vector2( 64, 90 )
 
 

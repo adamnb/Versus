@@ -50,8 +50,9 @@ func _ready():
 	
 func _input (event):
 	if (event.is_action_pressed("kb_aux0")): # Extra button for debugging
-		set_rot(get_rot()+PI/4)
-
+		#set_rot(get_rot()+PI/4)
+		hurt(20, direction, 1)
+		
 func _fixed_process(dT):
 	var x = get_pos().x
 	var y = get_pos().y

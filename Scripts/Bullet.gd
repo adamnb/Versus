@@ -33,6 +33,7 @@ func _on_body_enter (body):
 			body.hurt(damage, dir, punch)
 
 	var nIF = impact_flash.instance() # Create a new instance of the impact flash
+	print ("[BULLET] ", nIF)
 	get_node("/root/World").add_child(nIF) # Add it to the tree as a node
 	nIF.set_pos(get_pos()) # Reposition
 
