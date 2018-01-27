@@ -39,8 +39,8 @@ func _draw():
 		Color(0, 1, 0), # The fuggin brightest possible green
 		thickness)
 	
-	if show_fps:
-		draw_string(font, Vector2(1, 10), "Wheeeee", Color(1, 1, 1))
+#	if show_fps:
+#		draw_string(font, Vector2(1, 10), "Wheeeee", Color(1, 1, 1))
 
 func _process(dT):
 	update()

@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var spt # Child sprite object
+var spt  # Child sprite object
 
 # Control
 export var enabled   = true
@@ -48,11 +48,12 @@ func _ready():
 	health = max_health
 	
 	
+	
 func _input (event):
 	if (event.is_action_pressed("kb_aux0")): # Extra button for debugging
 		#set_rot(get_rot()+PI/4)
-		#hurt(20, direction, 1)
-		print (get_pos())
+		hurt(20, direction, 1)
+		#print (get_pos())
 		
 func _fixed_process(dT):
 	var x = get_pos().x
@@ -95,7 +96,13 @@ func _fixed_process(dT):
 # PAIN AND SUFFERING
 func hurt(damage, dir, punch):
 	move (Vector2(dir * punch, 0)) # Knockback
-	spt.blink(0.1) # Flash
+	
+	spt = get_child(0) # I don't trust get_child() for this task, but find_node() seems to not work at all in this function
+	
+	if spt:
+		spt.blink(0.1) # Flash
+	else:
+		print ("[PLAYER] I CAN'T FIND THE SPRITE WHAT THE FUCK DID YOU DO, ADAM?")
 	
 	health -= damage
 		

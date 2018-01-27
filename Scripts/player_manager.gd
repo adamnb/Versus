@@ -3,7 +3,7 @@ extends Node
 var players = [] # Instances of players
 
 var respawns = []
-export(int) var respawn_time = 1000000
+export(int) var respawn_time = 10
 var respawn_queue = []
 
 func _ready():
@@ -22,20 +22,31 @@ func _ready():
 	set_process(true)
 
 func _process(dT):
-	if respawn_queue.size() > 0:
-		#print ("[PLAYER MANAGER] ", respawn_queue)
-		
-		for p in respawn_queue:
-			p[1] -= dT
+	
+	#print ("[PLAYER MANAGER] ", respawn_queue)
+	var doomed = null
+	var i = 0
+	for p in respawn_queue:
+		p[1] -= dT
 			
-			if p[1] <= 0:
+		if p[1] <= 0:
 				
-				var nP = p[0]
-				print ("")
-				get_parent().add_child(nP)
-				nP.set_pos(Vector2(respawns[0].get_pos().x, respawns[0].get_pos().y))
+			var nP = p[0]
+			add_child(nP)
+			
+			var respawn_ind = rand_range(0, respawns.size()-1) # Random Index of all spawnpoints
+			nP.set_pos(Vector2(respawns[respawn_ind].get_pos().x, 
+				respawns[respawn_ind].get_pos().y)) # Set player position to chosen spawnpoint
+			
+			doomed = i
+			#print ("[PLAYER MANAGER] Doomed iter: ", doomed_i, " | Array: ", respawn_queue)
+			break
+				
+		i += 1
+	
+	if doomed != null:
+		respawn_queue.remove(doomed)
 	
 func respawn (player):
-	print ("[PLAYER MANAGER] I was asked to respawn ", player.get_name(), " but I don't like him and I'm stupid so I wont.")
+	print ("[PLAYER MANAGER] I was asked to respawn ", player.get_name(), " and I will fulfill that request because I am nice and intelligent.")
 	respawn_queue.append([player.duplicate(), respawn_time])
-	print ("[PLAYER MANAGER] ", respawn_queue)
