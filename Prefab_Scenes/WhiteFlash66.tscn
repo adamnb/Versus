@@ -8,7 +8,7 @@
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 seconds = false
-duration_s = 0.12
-duration_f = 5
+duration_s = 0.6
+duration_f = 3
 
 

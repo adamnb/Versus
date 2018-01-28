@@ -16,12 +16,12 @@ extents = Vector2( 10, 6 )
 custom_solver_bias = 0.0
 radius = 10.0
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 12 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 1.5, 1 )
@@ -79,9 +79,10 @@ _update_shape_index = 1
 
 [node name="Grounder" type="Area2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 0, 3.5 )
 input/pickable = false
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 0.2, 0, 0, 0.1, 0, -0.3 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
@@ -93,12 +94,13 @@ angular_damp = 1.0
 
 transform/pos = Vector2( 0, -0.3 )
 transform/scale = Vector2( 0.2, 0.1 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 trigger = true
 _update_shape_index = 0
 
 [node name="BulletSource" type="Position2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 5.5, 0 )
 script/script = ExtResource( 4 )
 mag_max = 2000
@@ -112,8 +114,9 @@ script/script = ExtResource( 5 )
 
 [node name="HeadCollider" type="Area2D" parent="."]
 
+editor/display_folded = true
 input/pickable = true
-shapes/0/shape = SubResource( 4 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.5, -2 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
@@ -124,7 +127,7 @@ angular_damp = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadCollider"]
 
 transform/pos = Vector2( 0.5, -2 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 trigger = true
 _update_shape_index = 0
 

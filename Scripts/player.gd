@@ -105,8 +105,6 @@ func hurt(damage, dir, punch):
 		print ("[PLAYER] I CAN'T FIND THE SPRITE WHAT THE FUCK DID YOU DO, ADAM?")
 	
 	health -= damage
-		
-	print ("[PLAYER] ", get_name(), " took ", damage, " damage and now has ", health, " health.")
 
 
 # Colliders & Triggers
