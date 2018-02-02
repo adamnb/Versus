@@ -3,9 +3,9 @@ extends KinematicBody2D
 var spt  # Child sprite object
 
 # Control
-export var enabled   = true
-export var control_m = 0 # control method
-var ctpf             = ["kb_", "gp_"] # list of prefixes for control methods
+export var enabled     = true
+export var control_m   = 0 # control method
+var ctpf               = ["kb_", "gp_", "gp2_"] # list of prefixes for control methods
 
 # Kinematics
 # -> HORIZONTAL
@@ -19,34 +19,35 @@ export var jumpVel     = 2.0
 var y_vel              = 0
 var grounded           = false
 
-# ->-> MULTI-JUMPING
-export var ex_jumps    = 1 # Amount of other mid-air jumps possible
-var cur_ex_jumps       = 0 # Current amount of left over jumps
-export var ex_jump_vel = 1.0
-
 # Status
 # -> HEALTH
+export var immune     = false
+var imm_dur           = 0
 export() var health   = 100
 export var max_health = 100
 
 export var dead 	  = false 
 
+export var printG     = false
+
+export var def_spt    = preload("res://Textures/Players/Soldier88.tex")
 
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	
 	spt = find_node("Sprite") # Obtain child sprite object
+	spt.def_spt = def_spt
 	
 	# Connect collision children
 	get_node("Grounder").connect("body_enter", self, "_on_Area2D_body_enter")
 	get_node("Grounder").connect("body_exit", self, "_on_Area2D_body_exit")
 	
 	get_node("HeadCollider").connect("body_enter", self, "_on_Head_body_enter")
+	get_node("HeadCollider").connect("body_exit", self, "_on_Head_body_exit")
 	
 	# Initialize Player
 	health = max_health
-	
 	
 	
 func _input (event):
@@ -78,20 +79,23 @@ func _fixed_process(dT):
 		if (Input.is_action_pressed(str(ctpf[control_m]) + "jump")):
 			if grounded:
 				y_vel = -jumpVel
-				cur_ex_jumps = ex_jumps
 	
 		speed = direction * def_spd #* dT # Final movement value
 	
 		#GRAVITATIONAL KINEMATICS
 		if (!grounded):
-			y_vel += gravity #* dT
+			y_vel += gravity #* dTdf
 			
 	if health <= 0:
 		print ("[PLAYER] ", get_name(), " is fuckin' dead holy shit")
 		get_parent().respawn(self)
 		queue_free()
+		
+	if immune:
+		imm_dur -= dT
 	
 	move_and_slide(Vector2(speed, y_vel)) # The normal move() function would create too much friction
+
 
 # PAIN AND SUFFERING
 func hurt(damage, dir, punch):
@@ -102,18 +106,31 @@ func hurt(damage, dir, punch):
 	if spt:
 		spt.blink(0.1) # Flash
 	else:
-		print ("[PLAYER] I CAN'T FIND THE SPRITE WHAT THE FUCK DID YOU DO, ADAM?")
+		print ("[PLAYER] (", get_name(), ") I CAN'T FIND THE SPRITE WHAT THE FUCK DID YOU DO, ADAM?")
 	
 	health -= damage
 
-
+func immunize (duration):
+	immune = true
+	imm_dur = duration
+	
+	
 # Colliders & Triggers
 func _on_Area2D_body_enter (body):
 	if body != self:
+		y_vel = 0
 		grounded = true
 
 func _on_Area2D_body_exit (body):
 	grounded = false
 
 func _on_Head_body_enter (body):
-	y_vel = 0
+
+	if body != self: # Added to prevent intercollision
+		print ("[PLAYER] ", get_name(), " is colliding with a foreign object, ", body.get_name())
+		y_vel = 0	
+		
+	
+func _on_Head_body_exit (body):
+	print ("[PLAYER] ", get_name(), "'s head is no longer making contact with ", body.get_name())
+	

@@ -21,7 +21,6 @@ func _ready():
 	print ("[PLAYER MANAGER] Initialized with ", player_c, " players")
 	print ("[PLAYER MANAGER] Initialized with ", respawns.size(), " spawnpoints")
 	
-	
 	set_process(true)
 
 func _process(dT):
@@ -42,7 +41,6 @@ func _process(dT):
 				respawns[respawn_ind].get_pos().y)) # Set player position to chosen spawnpoint
 			
 			doomed = i
-			#print ("[PLAYER MANAGER] Doomed iter: ", doomed_i, " | Array: ", respawn_queue)
 			break
 				
 		i += 1
@@ -50,14 +48,12 @@ func _process(dT):
 	if doomed != null:
 		respawn_queue.remove(doomed)
 	
-func respawn (player):
-	print ("[PLAYER MANAGER] Respawning ", player.get_name(), "...")
-	
+func respawn (player):	
 	for p in scores:
 		if p[0] == player.get_name():
 			p[1] -= 1
 	
-	print ( "[PLAYER MANAGER] ", scores)
+	#print ( "[PLAYER MANAGER] ", scores)
 	
 	respawn_queue.append([player.duplicate(), respawn_time])
 	

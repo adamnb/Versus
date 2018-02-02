@@ -44,5 +44,3 @@ func _draw():
 
 func _process(dT):
 	update()
-		
-	
