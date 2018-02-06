@@ -46,8 +46,7 @@ func _process(dT):
 				
 				cur_ammo -= 1
 				
-				if flash_spt:
-					flash_spt.flash(0.05) # Muzzle flash
+				flash_spt.flash(0.05) # Muzzle flash
 				
 				cur_t = chamber_dur
 	

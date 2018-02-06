@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var windowSize = Vector2(Globals.get("display/width"), Globals.get("display/height"))
+
 var spt  # Child sprite object
 
 # Control
@@ -61,6 +63,9 @@ func _fixed_process(dT):
 	
 	var x = get_pos().x
 	var y = get_pos().y
+	
+	if y - 5 > windowSize.y:
+		hurt(health, 0, 0) # Kill player
 	
 	if enabled:
 		#HORIZONTAL KINEMATICS
