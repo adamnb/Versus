@@ -1,6 +1,6 @@
 extends Position2D
 
-onready var flash_spt = find_node("Flash")
+onready var flash_spt = get_node("Flash")
 
 var proj = preload("res://Prefab_Scenes/Bullet.tscn") # Projectile prefab
 var dir  = 1 # Firing direction (-1, 1)

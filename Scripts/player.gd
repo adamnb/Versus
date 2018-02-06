@@ -36,7 +36,7 @@ func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	
-	spt = find_node("Sprite") # Obtain child sprite object
+	spt = get_node("Sprite") # Obtain child sprite object
 	spt.def_spt = def_spt
 	
 	# Connect collision children
@@ -56,11 +56,12 @@ func _input (event):
 		hurt(20, direction, 1)
 		#print (get_pos())
 		
+var firstFr = true
 func _fixed_process(dT):
+	
 	var x = get_pos().x
 	var y = get_pos().y
-
-
+	
 	if enabled:
 		#HORIZONTAL KINEMATICS
 		if (Input.is_action_pressed(str(ctpf[control_m]) + "left")):
@@ -101,12 +102,9 @@ func _fixed_process(dT):
 func hurt(damage, dir, punch):
 	move (Vector2(dir * punch, 0)) # Knockback
 	
-	spt = get_child(0) # I don't trust get_child() for this task, but find_node() seems to not work at all in this function
-	
-	if spt:
-		spt.blink(0.1) # Flash
-	else:
-		print ("[PLAYER] (", get_name(), ") I CAN'T FIND THE SPRITE WHAT THE FUCK DID YOU DO, ADAM?")
+	#spt = get_child(0) # I don't trust get_child() for this task, but find_node() seems to not work at all in this function
+
+	spt.blink(0.1) # Flash
 	
 	health -= damage
 
