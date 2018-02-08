@@ -37,8 +37,8 @@ func _process(dT):
 			add_child(nP)
 			
 			var respawn_ind = rand_range(0, respawns.size()) # Random Index of all spawnpoints
-			nP.set_pos(Vector2(respawns[respawn_ind].get_pos().x, 
-				respawns[respawn_ind].get_pos().y)) # Set player position to chosen spawnpoint
+			nP.position = Vector2(respawns[respawn_ind].position.x, 
+				respawns[respawn_ind].position.y) # Set player position to chosen spawnpoint
 			
 			doomed = i
 			break

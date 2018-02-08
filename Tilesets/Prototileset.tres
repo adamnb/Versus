@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=5 format=1]
+[gd_resource type="TileSet" load_steps=3 format=2]
 
 [ext_resource path="res://Textures/Prototile.tex" type="Texture" id=1]
 [ext_resource path="res://Textures/Prototile88-1.tex" type="Texture" id=2]
@@ -6,12 +6,12 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
+points = PoolVector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
+points = PoolVector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 
 [resource]
 
@@ -37,4 +37,3 @@ points = Vector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 1/shapes = [ SubResource( 2 ) ]
 1/one_way_collision_direction = Vector2( 0, 0 )
 1/one_way_collision_max_depth = 0.0
-

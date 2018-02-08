@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Textures/Prototile.tex" type="Texture" id=1]
 [ext_resource path="res://Textures/Prototile88-1.tex" type="Texture" id=2]
@@ -6,14 +6,15 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
+points = PoolVector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
+points = PoolVector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 
 [node name="Tilemap" type="Node"]
+
 
 [node name="ProtoTileConc88" type="Sprite" parent="."]
 
@@ -21,12 +22,12 @@ texture = ExtResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ProtoTileConc88"]
 
-input/pickable = false
+input_pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision_layer = 1
+collision_mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
@@ -35,7 +36,7 @@ bounce = 0.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ProtoTileConc88/StaticBody2D"]
 
 build_mode = 0
-polygon = Vector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
+polygon = PoolVector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
@@ -45,12 +46,12 @@ texture = ExtResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ProtoTileCheckered88"]
 
-input/pickable = false
+input_pickable = false
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision_layer = 1
+collision_mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
@@ -59,8 +60,6 @@ bounce = 0.0
 [node name="CollisionPolygon2D1" type="CollisionPolygon2D" parent="ProtoTileCheckered88/StaticBody2D"]
 
 build_mode = 0
-polygon = Vector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
+polygon = PoolVector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 shape_range = Vector2( 0, 0 )
 trigger = false
-
-

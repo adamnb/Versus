@@ -19,8 +19,8 @@ func _ready():
 	
 func _process(dT):
 	
-	x = get_global_pos().x
-	y = get_global_pos().y
+	x = global_position.x
+	y = global_position.y
 	
 	if duration > 0:
 		duration -= dT

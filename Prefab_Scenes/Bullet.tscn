@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://Textures/bullet.tex" type="Texture" id=2]
@@ -6,42 +6,37 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 33 )
+extents = Vector2( 1.5, 1 )
 
 [node name="Bullet" type="Node2D"]
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
 
-input/pickable = false
-collision/layers = 1
-collision/mask = 1
-collision/margin = 0.08
-script/script = ExtResource( 1 )
-force = 100.0
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
 speed = 4
-dir = 1
+damage = 12.5
+punch = 1
 
-[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+[node name="Sprite" type="Sprite" parent="KinematicBody2D" index="0"]
 
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+[node name="Area2D" type="Area2D" parent="KinematicBody2D" index="1"]
 
-transform/pos = Vector2( 0.021965, 0.0305634 )
-transform/scale = Vector2( 0.047, 0.031 )
-input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D" index="0"]
 
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
 

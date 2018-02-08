@@ -1,13 +1,14 @@
 extends Position2D
 
-onready var flash_spt = get_node("Flash")
+onready var flash_spt = find_node("Flash")
+export var flash_offset = Vector2(0, 0)
 
 var proj = preload("res://Prefab_Scenes/Bullet.tscn") # Projectile prefab
 var dir  = 1 # Firing direction (-1, 1)
 
 
-onready var control_m = get_parent().control_m  # Control mode of player
-onready var ctpf      = get_parent().ctpf       # Control prefixes
+onready var control_m = get_parent().get_parent().control_m  # Control mode of player
+onready var ctpf      = get_parent().get_parent().ctpf       # Control prefixes
 
 # MUNITIONS
 export var mag_max     = 1000 # Maximum ammo that can be stored in a magazine
@@ -19,13 +20,13 @@ var cur_ammo
 func _ready():
 	set_process_input(true)
 	set_process(true)
-	
+
 	cur_ammo = mag_max
 
 	
 func _process(dT):
-	var p_dir = get_parent().direction # The parent's movement direction (-1, 0, 1)
- 	
+	var p_dir = get_parent().get_parent().direction # The parent's movement direction (-1, 0, 1)
+
 	if p_dir == -1:
 		dir = -1
 	if p_dir == 1:
@@ -39,8 +40,8 @@ func _process(dT):
 			if (Input.is_action_pressed(str(ctpf[control_m]) + "fire")):
 
 				var nShot = proj.instance() # Create clone instance
-				get_parent().get_parent().get_parent().add_child(nShot) # Add to tree
-				nShot.get_child(0).set_pos(get_global_pos()) # Reposition
+				get_node("/root/World").add_child(nShot) # Add to tree
+				nShot.get_child(0).position = global_position # Reposition
 				
 				nShot.get_child(0).dir = dir # Movement dir
 				
@@ -49,7 +50,7 @@ func _process(dT):
 				flash_spt.flash(0.05) # Muzzle flash
 				
 				cur_t = chamber_dur
-	
+
 	if cur_t > 0:
 		cur_t -= dT
 	else:
