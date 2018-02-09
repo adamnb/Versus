@@ -15,7 +15,7 @@ func _ready():
 		player_c += 1
 		
 	for r in get_parent().get_children():
-		if r.get_name().ends_with("resp"):
+		if r.get_name().begins_with("resp"):
 			respawns.append(r)
 
 	print ("[PLAYER MANAGER] Initialized with ", player_c, " players")

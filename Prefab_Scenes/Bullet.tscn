@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 1.5, 1 )
 
-[node name="Bullet" type="Node2D"]
+[node name="Bullet" type="Node2D" index="0"]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
 
@@ -25,7 +25,15 @@ punch = 1
 
 texture = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="KinematicBody2D" index="1"]
+[node name="CanvasLayer" type="CanvasLayer" parent="KinematicBody2D" index="1"]
+
+layer = 0
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D" index="2"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )

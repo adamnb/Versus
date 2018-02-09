@@ -12,15 +12,14 @@ var res = Vector2(ProjectSettings.get("display/window/width"), ProjectSettings.g
 
 func _ready():
 	set_physics_process(true)
-
-	find_node("Area2D").connect("body_entered", self, "_on_body_enter")
+	$Area2D.connect("body_entered", self, "_on_body_enter")
 
 var firstFR = true # The first frame of the "_process()" function
 func _physics_process(dT):
 
 	var x = position.x
 	var y = position.y
-	
+
 
 	move_and_collide(Vector2(dir*speed, 0))
 
@@ -38,4 +37,4 @@ func _on_body_enter (body):
 	nIF.position = position # Reposition
 
 	get_parent().queue_free()
-	
+

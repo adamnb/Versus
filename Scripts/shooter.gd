@@ -1,6 +1,6 @@
 extends Position2D
 
-onready var flash_spt = find_node("Flash")
+onready var flash_spt   = find_node("Flash")
 export var flash_offset = Vector2(0, 0)
 
 var proj = preload("res://Prefab_Scenes/Bullet.tscn") # Projectile prefab
@@ -11,9 +11,11 @@ onready var control_m = get_parent().get_parent().control_m  # Control mode of p
 onready var ctpf      = get_parent().get_parent().ctpf       # Control prefixes
 
 # MUNITIONS
-export var mag_max     = 1000 # Maximum ammo that can be stored in a magazine
+export var mag_max     = 30 # Maximum ammo that can be stored in a magazine
 export var reload_s    = 1.5 # How long it takes for the player to reload (s) 
 export var chamber_dur = 0.25 # How long it takes to chamber a round
+var reloading = false
+var cur_rl_t = 0
 var cur_t = 0
 var cur_ammo
 
@@ -31,7 +33,7 @@ func _process(dT):
 		dir = -1
 	if p_dir == 1:
 		dir = 1
-		
+
 	if flash_spt:
 		flash_spt.set_texture(null)
 	
@@ -42,14 +44,24 @@ func _process(dT):
 				var nShot = proj.instance() # Create clone instance
 				get_node("/root/World").add_child(nShot) # Add to tree
 				nShot.get_child(0).position = global_position # Reposition
-				
+
 				nShot.get_child(0).dir = dir # Movement dir
 				
 				cur_ammo -= 1
-				
+
 				flash_spt.flash(0.05) # Muzzle flash
-				
+
 				cur_t = chamber_dur
+				
+				print (cur_ammo)
+	else:
+		cur_rl_t += dT
+
+		if cur_rl_t > reload_s:
+			cur_ammo = mag_max
+			cur_rl_t = 0
+		
+		print ("[SHOOTER] ", get_parent().get_parent().name, " is out of ammo")
 
 	if cur_t > 0:
 		cur_t -= dT
