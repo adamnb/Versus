@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cour.sv.png-0474cb7481d4f405c8f355115c6dddaf.stex"
+path="res://.import/soldier1212_2.png-281a8de419d1a03872ab256cccfe6bfc.stex"
 
 [deps]
 
-source_file="res://Fonts/cour.sv.png"
-source_md5="5a7d2dead24bce9c210560f1d89a9cae"
+source_file="res://Textures/Players/soldier1212_2.png"
+source_md5="ef18587478805bc62606d0385c02e5d5"
 
-dest_files=[ "res://.import/cour.sv.png-0474cb7481d4f405c8f355115c6dddaf.stex" ]
-dest_md5="01cd71ae95dc40877518978a361288e1"
+dest_files=[ "res://.import/soldier1212_2.png-281a8de419d1a03872ab256cccfe6bfc.stex" ]
+dest_md5="4a82edd9d792d619f0b2b0fc62ad7d0a"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -28,5 +28,5 @@ process/premult_alpha=false
 process/HDR_as_SRGB=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

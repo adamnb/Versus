@@ -11,13 +11,13 @@ onready var control_m = get_parent().get_parent().control_m  # Control mode of p
 onready var ctpf      = get_parent().get_parent().ctpf       # Control prefixes
 
 # MUNITIONS
-export var mag_max     = 30 # Maximum ammo that can be stored in a magazine
-export var reload_s    = 1.5 # How long it takes for the player to reload (s) 
-export var chamber_dur = 0.25 # How long it takes to chamber a round
+export var reload_s     = 1.5 # How long it takes for the player to reload (s) 
+export var chamber_dur  = 0.25 # How long it takes to chamber a round
+export(int) var mag_max = 30 # Maximum ammo that can be stored in a magazine
+var cur_ammo
 var reloading = false
 var cur_rl_t = 0
 var cur_t = 0
-var cur_ammo
 
 func _ready():
 	set_process_input(true)
@@ -25,6 +25,10 @@ func _ready():
 
 	cur_ammo = mag_max
 
+func _input(event):
+#	if (event.is_action_pressed(str(ctpf[control_m]) + "reload")):
+#		reload()
+	pass
 	
 func _process(dT):
 	var p_dir = get_parent().get_parent().direction # The parent's movement direction (-1, 0, 1)
@@ -52,18 +56,18 @@ func _process(dT):
 				flash_spt.flash(0.05) # Muzzle flash
 
 				cur_t = chamber_dur
-				
-				print (cur_ammo)
-	else:
-		cur_rl_t += dT
 
-		if cur_rl_t > reload_s:
-			cur_ammo = mag_max
-			cur_rl_t = 0
-		
-		print ("[SHOOTER] ", get_parent().get_parent().name, " is out of ammo")
+	else:
+		reload(dT)
 
 	if cur_t > 0:
 		cur_t -= dT
 	else:
 		cur_t = 0
+		
+func reload (delta):
+	cur_rl_t += delta
+
+	if cur_rl_t > reload_s:
+		cur_ammo = mag_max
+		cur_rl_t = 0

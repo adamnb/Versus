@@ -8,7 +8,9 @@
 custom_solver_bias = 0.0
 extents = Vector2( 1.5, 1 )
 
-[node name="Bullet" type="Node2D" index="0"]
+[node name="Bullet" type="Node2D"]
+
+_sections_unfolded = [ "Transform" ]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
 
@@ -17,7 +19,8 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-speed = 4
+_sections_unfolded = [ "collision" ]
+speed = 4.4
 damage = 12.5
 punch = 1
 

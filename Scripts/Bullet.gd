@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed = 10
+export(float) var speed = 10
 var dir          = 1 # Horizontal Direction
 
 export var damage = 12.5
@@ -19,7 +19,6 @@ func _physics_process(dT):
 
 	var x = position.x
 	var y = position.y
-
 
 	move_and_collide(Vector2(dir*speed, 0))
 

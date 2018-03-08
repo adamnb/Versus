@@ -10,11 +10,11 @@ export var inital_points = 5
 var scores = []
 
 func _ready():
-	for c in get_children():
+	for c in get_children(): # Get list of all players and give them points
 		scores.append([c.get_name(), inital_points])
 		player_c += 1
 		
-	for r in get_parent().get_children():
+	for r in get_parent().get_children(): # Get all respawn points
 		if r.get_name().begins_with("resp"):
 			respawns.append(r)
 
@@ -22,6 +22,8 @@ func _ready():
 	print ("[PLAYER MANAGER] Initialized with ", respawns.size(), " spawnpoints")
 	
 	set_process(true)
+
+
 
 func _process(dT):
 	
@@ -47,8 +49,9 @@ func _process(dT):
 	
 	if doomed != null:
 		respawn_queue.remove(doomed)
-	
-func respawn (player):	
+
+
+func respawn (player):
 	for p in scores:
 		if p[0] == player.get_name():
 			p[1] -= 1

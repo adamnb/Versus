@@ -33,7 +33,7 @@ export var dead       = false
 
 export var printG     = false
 
-export var def_spt    = preload("res://Textures/Players/Soldier88.tex")
+export var def_spt    = preload("res://Textures/Players/Soldier1212.png")
 
 func _ready():
 	set_physics_process(true)
@@ -67,18 +67,18 @@ func _physics_process(dT):
 		hurt(health, 0, 0) # Kill player
 	
 	if enabled:
-		
+
 		#HORIZONTAL KINEMATICS
 		if (Input.is_action_pressed(str(ctpf[control_m]) + "left")):
 			direction = -1 
 			container.scale = Vector2(-1, 1) 
 			spt.flip_h = true
-	
+
 		elif (Input.is_action_pressed(str(ctpf[control_m]) + "right")):
 			direction = 1
 			container.scale = Vector2(1, 1)
 			spt.flip_h = false
-	
+
 		else: 
 			direction = 0
 
@@ -92,12 +92,14 @@ func _physics_process(dT):
 		#GRAVITATIONAL KINEMATICS
 		if (!grounded):
 			y_vel += gravity #* dTdf
+			print ("[PLAYER] Not grounded. The grounder is at ", $Grounder.position)
+
 
 	if health <= 0:
 		print ("[PLAYER] ", get_name(), " is fuckin' dead holy shit")
 		get_parent().respawn(self)
 		queue_free()
-		
+
 
 	if immune:
 		imm_dur -= dT
@@ -127,6 +129,7 @@ func _on_Area2D_body_enter (body):
 	if body != self:
 		y_vel = 0
 		grounded = true
+		print ("[PLAYER] ", get_name(), " is colliding with, ", body.get_name())
 
 
 func _on_Area2D_body_exit (body):
@@ -134,12 +137,17 @@ func _on_Area2D_body_exit (body):
 
 
 func _on_Head_body_enter (body):
-
 	if body != self: # Added to prevent intercollision
-		print ("[PLAYER] ", get_name(), " is colliding with a foreign object, ", body.get_name())
+		var oldyvel = y_vel
 		y_vel = 0
+		#print ("[PLAYER] ", get_name(), "'s head is colliding with a foreign object, ", body.get_name())
+#	else:
+#		print ("[PLAYER] ", get_name(), "'s head is colliding with himself")
 
 
-func _on_Head_body_exit (body):
-	print ("[PLAYER] ", get_name(), "'s head is no longer making contact with ", body.get_name())
+#func _on_Head_body_exit (body):
+#	if body != self:
+#		print ("[PLAYER] ", get_name(), "'s head is no longer colliding with ", body.get_name())
+#	else:
+#		print ("[PLAYER] ", get_name(), " stopped colliding with himself")
 

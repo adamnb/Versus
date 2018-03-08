@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://Textures/Players/Soldier88red.tex" type="Texture" id=2]
-[ext_resource path="res://Textures/Players/Soldier88.tex" type="Texture" id=3]
+[ext_resource path="res://Textures/Players/soldier1212.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/player_sprite.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/shooter.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/flash.gd" type="Script" id=6]
@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 6 )
+extents = Vector2( 3, 2 )
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -20,12 +20,12 @@ radius = 10.0
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 12 )
+extents = Vector2( 9, 12 )
 
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 1.5, 0.75 )
+extents = Vector2( 2, 0.5 )
 
 [node name="Player0" type="KinematicBody2D" index="0"]
 
@@ -49,32 +49,33 @@ def_spt = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
+position = Vector2( 0, -2 )
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="BodyCollider" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 0, 0.5 )
-scale = Vector2( 0.2, 0.25 )
+position = Vector2( 1, -1 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="FootCollider" type="CollisionShape2D" parent="." index="2"]
 
-position = Vector2( 0, 2 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( 1, 1 )
+scale = Vector2( 0.3, 0.3 )
 shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Grounder" type="Area2D" parent="." index="3"]
 
-editor/display_folded = true
-position = Vector2( 0, 3.2 )
+position = Vector2( 1, 3 )
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -82,11 +83,13 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grounder" index="0"]
 
-scale = Vector2( 0.2, 0.1 )
+scale = Vector2( 0.3, 0.125 )
 shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="4"]
 
@@ -100,13 +103,13 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="BulletSource" type="Position2D" parent="ElementContainer" index="0"]
 
-editor/display_folded = true
-position = Vector2( 4.5, 0 )
+position = Vector2( 7, -1 )
 script = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
 flash_offset = Vector2( 0, 0 )
-mag_max = 30
 reload_s = 1.5
 chamber_dur = 0.12
+mag_max = 30
 
 [node name="Flash" type="Sprite" parent="ElementContainer/BulletSource" index="0"]
 
@@ -115,7 +118,7 @@ script = ExtResource( 6 )
 
 [node name="HeadCollider" type="Area2D" parent="ElementContainer" index="1"]
 
-position = Vector2( 0.5, -2.25 )
+position = Vector2( 1, -5.5 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

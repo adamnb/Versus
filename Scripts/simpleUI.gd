@@ -24,20 +24,51 @@ func _ready():
 func _draw():
 	for c in playerContainer.get_children():
 		#please forgive me DRY
-
-		# MASK
+		
+		var bullet_src = c.get_node("ElementContainer").get_node("BulletSource")
+		
+		# HEALTH
+		# - MASK
 		draw_line(
 		Vector2(c.position.x - x_offset, c.position.y + height), 
 		Vector2(c.position.x + width - x_offset, c.position.y + height), 
 		Color(1, 0, 0), # The fuggin brightest possible red
 		thickness)
 
-		# BAR
+		# - BAR
 		draw_line(
 		Vector2(c.position.x - x_offset, c.position.y + height), 
 		Vector2(c.position.x + (width*(c.health/100)) - x_offset, c.position.y + height), 
 		Color(0, 1, 0), # The fuggin brightest possible green
 		thickness)
+		
+		# AMMO
+		var ammo_quot  = float(bullet_src.cur_ammo) / float(bullet_src.mag_max)
+		var ammo_col_n = Color(1, 0.71, 0.25)
+		var ammo_col_l = Color(1, 0, 0)
+		var ammo_col   = Color(0)
+		
+		# Color changing
+		if ammo_quot <= 0.3: # Ammo < 30%
+			ammo_col = ammo_col_l # change to red
+		else:
+			ammo_col = ammo_col_n
+		
+		# - MASK
+		draw_line(
+		Vector2(c.position.x - x_offset, c.position.y + height + 1), 
+		Vector2(c.position.x + width - x_offset, c.position.y + height + 1), 
+		Color(0.5, 0.5, 0.5), # Mid grey
+		thickness)
+		
+		# - BAR
+		draw_line(
+		Vector2(c.position.x - x_offset, c.position.y + height + 1), 
+		Vector2(c.position.x + (width * ammo_quot) - x_offset,
+			c.position.y + height + 1),
+		ammo_col, # T
+		thickness)
+		
 
 #	if show_fps:
 #		draw_string(font, Vector2(1, 10), "Wheeeee", Color(1, 1, 1))
