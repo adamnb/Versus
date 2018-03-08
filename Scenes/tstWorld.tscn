@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/simpleUI.gd" type="Script" id=5]
 [ext_resource path="res://Prefab_Scenes/spawnpoint.tscn" type="PackedScene" id=6]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 [node name="TileMap1" type="TileMap" parent="." index="0"]
 

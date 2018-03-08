@@ -4,7 +4,7 @@ var player_c = 0
 
 var respawns = [] # List of respawn points
 export(int) var respawn_time = 10
-var respawn_queue = []
+var respawn_queue = [] # All players that are dead and waiting to be respawned
 
 export var inital_points = 5
 var scores = []
@@ -27,13 +27,12 @@ func _ready():
 
 func _process(dT):
 	
-	#print ("[PLAYER MANAGER] ", respawn_queue)
 	var doomed = null
 	var i = 0
 	for p in respawn_queue:
-		p[1] -= dT
+		p[1] -= dT # Countdown remaining time in seconds
 			
-		if p[1] <= 0:
+		if p[1] <= 0: # Time is up
 				
 			var nP = p[0]
 			add_child(nP)

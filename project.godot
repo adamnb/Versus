@@ -12,9 +12,11 @@ config_version=3
 
 config/name="Finish People [sic]"
 run/main_scene="res://Scenes/tstWorld.tscn"
-icon="res://tempicon.png"
+boot_splash/image="res://well.png"
+config/icon="res://well.png"
 main_scene="res://Scenes/tstWorld.tscn"
 name="bad game"
+icon="res://tempicon.jpg"
 
 [debug]
 
