@@ -11,6 +11,7 @@ export var control_m   = 0 # control method
 var ctpf               = ["kb_", "gp_", "gp2_"] # list of prefixes for control methods
 
 # Kinematics
+var motion             = Vector2(0, 0)
 # -> HORIZONTAL
 var direction          = 0 # Directional coefficient
 export var def_spd     = 1 # The default horizontal speed
@@ -45,9 +46,6 @@ func _ready():
 	$Grounder.connect("body_entered", self, "_on_Area2D_body_enter")
 	$Grounder.connect("body_exited", self, "_on_Area2D_body_exit")
 
-	$ElementContainer/HeadCollider.connect("body_entered", self, "_on_Head_body_enter")
-	$ElementContainer/HeadCollider.connect("body_exited", self, "_on_Head_body_exit")
-
 	# Initialize Player
 	health = max_health
 
@@ -65,6 +63,8 @@ func _physics_process(dT):
 	
 	if y - 5 > windowSize.y:
 		hurt(health, 0, 0) # Kill player
+		
+	motion.y += gravity
 	
 	if enabled:
 
@@ -82,17 +82,16 @@ func _physics_process(dT):
 		else: 
 			direction = 0
 
-
 		if (Input.is_action_pressed(str(ctpf[control_m]) + "jump")):
 			if grounded:
-				y_vel = -jumpVel
+				motion.y = -jumpVel
 
-		speed = direction * def_spd #* dT # Final movement value
+		motion.x = direction * def_spd #* dT # Final movement value
 
 		#GRAVITATIONAL KINEMATICS
-		if (!grounded):
-			y_vel += gravity #* dTdf
-			print ("[PLAYER] Not grounded. The grounder is at ", $Grounder.position)
+#		if (!grounded):
+#			motion.y += gravity #* dTdf
+#			print ("[PLAYER] Not grounded. The grounder is at ", $Grounder.position)
 
 
 	if health <= 0:
@@ -104,8 +103,7 @@ func _physics_process(dT):
 	if immune:
 		imm_dur -= dT
 
-	move_and_slide(Vector2(speed, y_vel)) # The normal move() function would create too much friction
-
+	motion = move_and_slide(motion) # The normal move() function would create too much friction
 
 # PAIN AND SUFFERING
 func hurt(damage, dir, punch):
@@ -127,7 +125,7 @@ func immunize (duration):
 # Colliders & Triggers
 func _on_Area2D_body_enter (body):
 	if body != self:
-		y_vel = 0
+		#y_vel = 0
 		grounded = true
 		print ("[PLAYER] ", get_name(), " is colliding with, ", body.get_name())
 
@@ -136,10 +134,10 @@ func _on_Area2D_body_exit (body):
 	grounded = false
 
 
-func _on_Head_body_enter (body):
-	if body != self: # Added to prevent intercollision
-		var oldyvel = y_vel
-		y_vel = 0
+#func _on_Head_body_enter (body):
+#	if body != self: # Added to prevent intercollision
+#		var oldyvel = y_vel
+#		y_vel = 0
 		#print ("[PLAYER] ", get_name(), "'s head is colliding with a foreign object, ", body.get_name())
 #	else:
 #		print ("[PLAYER] ", get_name(), "'s head is colliding with himself")

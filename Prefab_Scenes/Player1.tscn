@@ -17,15 +17,15 @@ extents = Vector2( 3, 2 )
 custom_solver_bias = 0.0
 radius = 10.0
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 9, 12 )
+points = PoolVector2Array( -1, -5, 0, -6, 3, -6, 3, -3, -1, -3 )
 
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 2, 0.5 )
+extents = Vector2( 9, 12 )
 
 [node name="Player0" type="KinematicBody2D"]
 
@@ -74,8 +74,13 @@ scale = Vector2( 0.3, 0.3 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Grounder" type="Area2D" parent="." index="3"]
+[node name="HeadCollider" type="CollisionShape2D" parent="." index="3"]
 
+shape = SubResource( 3 )
+
+[node name="Grounder" type="Area2D" parent="." index="4"]
+
+editor/display_folded = true
 position = Vector2( 1, 3 )
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )
@@ -89,16 +94,16 @@ _sections_unfolded = [ "Transform" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grounder" index="0"]
 
 scale = Vector2( 0.3, 0.125 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="4"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="5"]
 
 position = Vector2( 0, -7 )
 animation = "default"
 _sections_unfolded = [ "Visibility" ]
 
-[node name="ElementContainer" type="Node2D" parent="." index="5"]
+[node name="ElementContainer" type="Node2D" parent="." index="6"]
 
 _sections_unfolded = [ "Transform" ]
 
@@ -116,22 +121,5 @@ mag_max = 30
 
 position = Vector2( 3, 0 )
 script = ExtResource( 6 )
-
-[node name="HeadCollider" type="Area2D" parent="ElementContainer" index="1"]
-
-position = Vector2( 1, -5.5 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Transform" ]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ElementContainer/HeadCollider" index="0"]
-
-shape = SubResource( 4 )
-_sections_unfolded = [ "Transform" ]
 
 

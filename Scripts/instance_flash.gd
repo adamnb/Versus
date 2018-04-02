@@ -1,6 +1,6 @@
 extends Node
 
-export var seconds    = true # Using seconds for timekeeping
+export var seconds    = true # Using seconds for timekeeping, otherwise, uses frames 
 export var duration_s = 0.06 # Existence duration for seconds
 export var duration_f = 1    # Existence duration for frames
 
