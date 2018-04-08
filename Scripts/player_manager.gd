@@ -1,6 +1,6 @@
 extends Node
 
-var player_c = 0
+var player_c = 0 # Playercount
 
 var respawns = [] # List of respawn points
 export(int) var respawn_time = 10
@@ -9,10 +9,18 @@ var respawn_queue = [] # All players that are dead and waiting to be respawned
 export var inital_points = 5
 var scores = []
 
+# Player indicators
+var p1_indr = load("res://Prefab_Scenes/Text_Resources/P1_indicator.tscn")
+var p2_indr = load("res://Prefab_Scenes/Text_Resources/P2_indicator.tscn")
+
 func _ready():
-	for c in get_children(): # Get list of all players and give them points
+	var pos = 1
+	for c in get_children(): # Get list of all players and give them points, designate position
 		scores.append([c.get_name(), inital_points])
+		c.ppos = pos
+		
 		player_c += 1
+		pos += 1
 		
 	for r in get_parent().get_children(): # Get all respawn points
 		if r.get_name().begins_with("resp"):
@@ -22,7 +30,6 @@ func _ready():
 	print ("[PLAYER MANAGER] Initialized with ", respawns.size(), " spawnpoints")
 	
 	set_process(true)
-
 
 
 func _process(dT):
@@ -40,6 +47,9 @@ func _process(dT):
 			var respawn_ind = rand_range(0, respawns.size()) # Random Index of all spawnpoints
 			nP.position = Vector2(respawns[respawn_ind].position.x, 
 				respawns[respawn_ind].position.y) # Set player position to chosen spawnpoint
+				
+			#var plr_indr = p1_indr.instance()
+			 
 			
 			doomed = i
 			break

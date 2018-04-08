@@ -8,7 +8,7 @@ export var width     = 8
 export var x_offset  = 3
 export var thickness = 1.0
 
-#var font = DynamicFont.new()
+export(Font) var font# = DynamicFont.new()
 
 var playerContainer
 
@@ -16,10 +16,10 @@ func _ready():
 	playerContainer = get_parent().find_node("Players")
 	set_process(true)
 
-#	var data = DynamicFontData.new()
-#	data.set_font_path("res://Fonts/cour.fnt")
-#	font.set_font_data(data)
-#	font.set_size(5)
+	var data = DynamicFontData.new()
+	data.set_font_path("res://Prefab_Scenes/Fonts/cour.fnt")
+	#font.set_font_data(data)
+	#font.set_size(5)
 
 func _draw():
 	for c in playerContainer.get_children():
@@ -64,14 +64,12 @@ func _draw():
 		# - BAR
 		draw_line(
 		Vector2(c.position.x - x_offset, c.position.y + height + 1), 
-		Vector2(c.position.x + (width * ammo_quot) - x_offset,
-			c.position.y + height + 1),
+		Vector2(c.position.x + (width * ammo_quot) - x_offset, c.position.y + height + 1),
 		ammo_col, # T
 		thickness)
 		
-
-#	if show_fps:
-#		draw_string(font, Vector2(1, 10), "Wheeeee", Color(1, 1, 1))
+	
+	draw_string(font, Vector2(30, 30), str("Wheeeee"), Color(1, 1, 1))
 
 func _process(dT):
 	update()

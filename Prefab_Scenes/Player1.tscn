@@ -41,11 +41,11 @@ control_m = 0
 def_spd = 100
 gravity = 11.4
 jumpVel = 215.0
+ppos = 0
 immune = false
 health = 100
 max_health = 100
 dead = false
-printG = false
 def_spt = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
@@ -109,7 +109,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="BulletSource" type="Position2D" parent="ElementContainer" index="0"]
 
-position = Vector2( 7, -1 )
+position = Vector2( 6, -1 )
 script = ExtResource( 5 )
 _sections_unfolded = [ "Transform" ]
 flash_offset = Vector2( 0, 0 )

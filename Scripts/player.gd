@@ -25,14 +25,13 @@ var grounded           = false
 
 # Status
 # -> HEALTH
+export var ppos       = 0
 export var immune     = false
 var imm_dur           = 0
 export var health     = 100
 export var max_health = 100
 
 export var dead       = false 
-
-export var printG     = false
 
 export var def_spt    = preload("res://Textures/Players/Soldier1212.png")
 
@@ -54,13 +53,28 @@ func _input (event):
 	if (event.is_action_pressed("kb_aux0")): # Extra button for debugging
 		hurt(20, direction, 1)
 
-
+var fframe = true
 func _physics_process(dT):
 	var scale_dir = 0
 	
 	var x = position.x
 	var y = position.y
-	
+
+	if fframe:
+		print ("[PLAYER] ", get_name(), " is player ", ppos)
+		
+		var plr_indr
+		
+		if ppos == 1:
+			plr_indr = load("res://Prefab_Scenes/Text_Resources/P1_inicator.tscn").instance()
+		if ppos == 2:
+			plr_indr = load("res://Prefab_Scenes/Text_Resources/P2_inicator.tscn").instance()
+		
+		add_child(plr_indr)
+		plr_indr.position = Vector2(0, -12)
+		 
+		fframe = false
+		
 	if y - 5 > windowSize.y:
 		hurt(health, 0, 0) # Kill player
 		
@@ -127,25 +141,8 @@ func _on_Area2D_body_enter (body):
 	if body != self:
 		#y_vel = 0
 		grounded = true
-		print ("[PLAYER] ", get_name(), " is colliding with, ", body.get_name())
+		print ("[PLAYER] ", get_name(), " is colliding with ", body.get_name())
 
 
 func _on_Area2D_body_exit (body):
 	grounded = false
-
-
-#func _on_Head_body_enter (body):
-#	if body != self: # Added to prevent intercollision
-#		var oldyvel = y_vel
-#		y_vel = 0
-		#print ("[PLAYER] ", get_name(), "'s head is colliding with a foreign object, ", body.get_name())
-#	else:
-#		print ("[PLAYER] ", get_name(), "'s head is colliding with himself")
-
-
-#func _on_Head_body_exit (body):
-#	if body != self:
-#		print ("[PLAYER] ", get_name(), "'s head is no longer colliding with ", body.get_name())
-#	else:
-#		print ("[PLAYER] ", get_name(), " stopped colliding with himself")
-
