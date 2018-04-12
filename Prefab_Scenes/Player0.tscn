@@ -27,7 +27,7 @@ extents = Vector2( 9, 12 )
 custom_solver_bias = 0.0
 extents = Vector2( 2, 0.5 )
 
-[node name="Player0" type="KinematicBody2D"]
+[node name="Player0" type="KinematicBody2D" index="0"]
 
 z_as_relative = false
 input_pickable = false
@@ -41,11 +41,11 @@ control_m = 0
 def_spd = 100
 gravity = 11.4
 jumpVel = 215.0
+ppos = 0
 immune = false
 health = 100
 max_health = 100
 dead = false
-printG = false
 def_spt = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
@@ -57,6 +57,8 @@ _sections_unfolded = [ "Offset", "Transform" ]
 __meta__ = {
 "_edit_lock_": true
 }
+randomize_col = true
+random_alpha = false
 
 [node name="BodyCollider" type="CollisionShape2D" parent="." index="1"]
 

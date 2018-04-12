@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/soldier1212_2.png-281a8de419d1a03872ab256cccfe6bfc.stex"
+path="res://.import/bkgr.png-f2f9613f93992fd12fe6a2dd64b48579.stex"
 
 [deps]
 
-source_file="res://Textures/Players/soldier1212_2.png"
-source_md5="f0ee837d166d4e9f9e8f3a31796f83f4"
+source_file="res://Textures/bkgr.png"
+source_md5="7de4af1f3da3df5e1140462efb200418"
 
-dest_files=[ "res://.import/soldier1212_2.png-281a8de419d1a03872ab256cccfe6bfc.stex" ]
-dest_md5="a93cd10abc69077f94dd4186530f7ac2"
+dest_files=[ "res://.import/bkgr.png-f2f9613f93992fd12fe6a2dd64b48579.stex" ]
+dest_md5="4427c830602a3b2d0a83ad367c402aed"
 
 [params]
 

@@ -1,20 +1,22 @@
 extends KinematicBody2D
-
+ 
 export(float) var speed = 10
-var dir          = 1 # Horizontal Direction
+var dir                 = 1 # Horizontal Direction
 
 export var damage = 12.5
 export var punch  = 1
 
 var impact_flash  = preload("res://Prefab_Scenes/WhiteFlash66.tscn")
-
-var res = Vector2(ProjectSettings.get("display/window/width"), ProjectSettings.get("display/window/height"))
+var res = Vector2(
+	ProjectSettings.get("display/window/width"), 
+	ProjectSettings.get("display/window/height"))
 
 func _ready():
+	
 	set_physics_process(true)
 	$Area2D.connect("body_entered", self, "_on_body_enter")
 
-var firstFR = true # The first frame of the "_process()" function
+
 func _physics_process(dT):
 
 	var x = position.x

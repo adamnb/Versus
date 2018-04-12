@@ -50,13 +50,15 @@ def_spt = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 0, -2 )
+position = Vector2( 1.5, -1 )
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
-_sections_unfolded = [ "Offset", "Transform" ]
+_sections_unfolded = [ "Material", "Offset", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
+randomize_col = true
+random_alpha = false
 
 [node name="BodyCollider" type="CollisionShape2D" parent="." index="1"]
 
@@ -77,6 +79,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="HeadCollider" type="CollisionShape2D" parent="." index="3"]
 
 shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Grounder" type="Area2D" parent="." index="4"]
 

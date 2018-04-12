@@ -72,6 +72,8 @@ func _physics_process(dT):
 		
 		add_child(plr_indr)
 		plr_indr.position = Vector2(0, -12)
+		plr_indr.global_position.x = floor(plr_indr.global_position.x)
+		plr_indr.global_position.y = floor(plr_indr.global_position.y)
 		 
 		fframe = false
 		
@@ -101,11 +103,6 @@ func _physics_process(dT):
 				motion.y = -jumpVel
 
 		motion.x = direction * def_spd #* dT # Final movement value
-
-		#GRAVITATIONAL KINEMATICS
-#		if (!grounded):
-#			motion.y += gravity #* dTdf
-#			print ("[PLAYER] Not grounded. The grounder is at ", $Grounder.position)
 
 
 	if health <= 0:

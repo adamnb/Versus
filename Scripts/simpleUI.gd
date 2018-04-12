@@ -69,7 +69,7 @@ func _draw():
 		thickness)
 		
 	
-	draw_string(font, Vector2(30, 30), str("Wheeeee"), Color(1, 1, 1))
+	#draw_string(font, Vector2(30, 30), str("Wheeeee"), Color(1, 1, 1))
 
 func _process(dT):
 	update()

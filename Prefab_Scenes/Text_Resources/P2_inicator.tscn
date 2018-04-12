@@ -3,11 +3,12 @@
 [ext_resource path="res://Textures/Text_Resources/P2_inicator.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/instance_flash.gd" type="Script" id=2]
 
-[node name="P2_inicator" type="Sprite"]
+[node name="P2_inicator" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
+offset = Vector2( 0.5, 0 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
 seconds = true
 duration_s = 5.0
 duration_f = 0

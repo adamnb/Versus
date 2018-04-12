@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Tilesets/tileset2_b.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefab_Scenes/Player0.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Textures/Players/Soldier1212.png" type="Texture" id=3]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -34,6 +33,6 @@ position = Vector2( 149.292, 139.028 )
 def_spd = 70
 gravity = 8.0
 jumpVel = 150.0
-def_spt = ExtResource( 3 )
+ppos = 0
 
 

@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/simpleUI.gd" type="Script" id=4]
 [ext_resource path="res://Prefab_Scenes/spawnpoint.tscn" type="PackedScene" id=5]
 
-[node name="World" type="Node" index="0"]
+[node name="World" type="Node"]
 
 [node name="TileMap1" type="TileMap" parent="." index="0"]
 
@@ -40,13 +40,11 @@ inital_points = 5
 [node name="Bichael" parent="Players" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 17, 146 )
-ppos = 0
 
 [node name="Bepis" parent="Players" index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 298, 145 )
 control_m = 1
-ppos = 0
 
 [node name="CustomDraw" type="Node2D" parent="." index="2"]
 

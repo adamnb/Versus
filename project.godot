@@ -14,7 +14,7 @@ config/name="Finish People [sic]"
 run/main_scene="res://Scenes/tstWorld.tscn"
 boot_splash/image="res://well.png"
 config/icon="res://well.png"
-main_scene="res://Scenes/tstWorld.tscn"
+main_scene="res://Scenes/newMap.tscn"
 name="bad game"
 icon="res://tempicon.jpg"
 
@@ -67,7 +67,7 @@ gp2_left=[ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resour
  ]
 gp2_right=[ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
  ]
-gp_fire=[ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+gp_fire=[ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
  ]
 gp_jump=[ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)

@@ -1,12 +1,14 @@
-[gd_scene load_steps=1 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Textures/whiteflash66.tex" type="Texture" id=1]
 [ext_resource path="res://Scripts/instance_flash.gd" type="Script" id=2]
 
-[node name="WhiteFlash66" type="Sprite"]
+[node name="WhiteFlash66" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-seconds = false
-duration_s = 0.6
-duration_f = 3
+seconds = true
+duration_s = 0.06
+duration_f = 1
+
+

@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Textures/bkgr.png" type="Texture" id=1]
+
+[node name="tilemap" type="Node" index="0"]
+
+[node name="cl_1" type="CanvasLayer" parent="." index="0"]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="1" type="Sprite" parent="cl_1" index="0"]
+
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 12, 12 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+[node name="cl_2" type="CanvasLayer" parent="." index="1"]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="2" type="Sprite" parent="cl_2" index="0"]
+
+position = Vector2( 12, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 12, 12, 12 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+[node name="cl_3" type="CanvasLayer" parent="." index="2"]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="3" type="Sprite" parent="cl_3" index="0"]
+
+position = Vector2( 24, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 24, 12, 12 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+[node name="cl_4" type="CanvasLayer" parent="." index="3"]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="4" type="Sprite" parent="cl_4" index="0"]
+
+position = Vector2( 36, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 36, 12, 12 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+[node name="cl_5" type="CanvasLayer" parent="." index="4"]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="5" type="Sprite" parent="cl_5" index="0"]
+
+position = Vector2( 48, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 48, 12, 12 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+[node name="cl_6" type="CanvasLayer" parent="." index="5"]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="6" type="Sprite" parent="cl_6" index="0"]
+
+position = Vector2( 60, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 60, 12, 12 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
+
+

@@ -7,10 +7,10 @@ path="res://.import/soldier1212.png-79791f908af978ddfcd1d103b1c2667a.stex"
 [deps]
 
 source_file="res://Textures/Players/soldier1212.png"
-source_md5="3e96fa0512b23f295520ee147d423715"
+source_md5="3f593ab74a9484b7ab9f94725f500175"
 
 dest_files=[ "res://.import/soldier1212.png-79791f908af978ddfcd1d103b1c2667a.stex" ]
-dest_md5="5edec0b19939e5540052f359b0537db5"
+dest_md5="bdd86d632b27f5352e4f40783f4f7d0c"
 
 [params]
 
