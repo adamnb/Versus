@@ -1,17 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/instance_flash.gd" type="Script" id=1]
 [ext_resource path="res://Textures/deadGun.tex" type="Texture" id=2]
 
-[node name="DeadGun" type="RigidBody2D" index="0"]
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2.5, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 0.5, 0.5 )
+
+[node name="DeadGun" type="RigidBody2D"]
 
 input_pickable = false
-collision_layer = 0
-collision_mask = 1
+collision_layer = 4
+collision_mask = 5
 mode = 0
 mass = 0.25
 friction = 0.5
-bounce = 0.1
+bounce = 0.5
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
@@ -24,8 +34,9 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 seconds = true
-duration_s = 2.0
+duration_s = 30.0
 duration_f = 1
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
@@ -35,12 +46,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-build_mode = 0
-polygon = PoolVector2Array( -2.5, -1.5, -2.5, 0.5, -1.5, 0.5, -1.5, -0.5, -0.5, -0.5, -0.5, 1.5, 0.5, 1.5, 0.5, 0.5, 2.5, 0.5, 2.5, -1.5 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 0, -0.5 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D_2" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( 0, 1 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 

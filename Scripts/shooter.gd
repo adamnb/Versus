@@ -11,13 +11,13 @@ onready var control_m = get_parent().get_parent().control_m  # Control mode of p
 onready var ctpf      = get_parent().get_parent().ctpf       # Control prefixes
 
 # MUNITIONS
-export var reload_s     = 1.5 # How long it takes for the player to reload (s) 
 export var chamber_dur  = 0.25 # How long it takes to chamber a round
 export(int) var mag_max = 30 # Maximum ammo that can be stored in a magazine
+export var reload_s     = 1.5 # How long it takes for the player to reload (s) 
 var cur_ammo
 var reloading = false
-var cur_rl_t = 0
-var cur_t = 0
+var cur_rl_t  = 0
+var cur_t     = 0
 
 func _ready():
 	set_process_input(true)
@@ -66,8 +66,10 @@ func _process(dT):
 		cur_t = 0
 		
 func reload (delta):
+	reloading = true
 	cur_rl_t += delta
 
 	if cur_rl_t > reload_s:
 		cur_ammo = mag_max
 		cur_rl_t = 0
+		reloading = false

@@ -42,11 +42,14 @@ func _process(dT):
 		if p[1] <= 0: # Time is up
 				
 			var nP = p[0]
+			#nP.get_node("sprite").randomize_col = false
+			
 			add_child(nP)
 			
 			var respawn_ind = rand_range(0, respawns.size()) # Random Index of all spawnpoints
 			nP.position = Vector2(respawns[respawn_ind].position.x, 
 				respawns[respawn_ind].position.y) # Set player position to chosen spawnpoint
+			
 				
 			#var plr_indr = p1_indr.instance()
 			 

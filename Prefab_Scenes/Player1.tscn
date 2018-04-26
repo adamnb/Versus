@@ -1,11 +1,20 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/player.gd" type="Script" id=1]
-[ext_resource path="res://Textures/Players/Soldier1212.png" type="Texture" id=2]
-[ext_resource path="res://Textures/Players/soldier1212.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/player_sprite.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/shooter.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/flash.gd" type="Script" id=6]
+[ext_resource path="res://Prefab_Scenes/DeadGun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Textures/Players/Soldier1212.png" type="Texture" id=3]
+[ext_resource path="res://Textures/Players/soldier1212.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/player_sprite.gd" type="Script" id=5]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW0.png" type="Texture" id=6]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW1.png" type="Texture" id=7]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW2.png" type="Texture" id=8]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW3.png" type="Texture" id=9]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW4.png" type="Texture" id=10]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW5.png" type="Texture" id=11]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW6.png" type="Texture" id=12]
+[ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW7.png" type="Texture" id=13]
+[ext_resource path="res://Scripts/shooter.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/flash.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -27,18 +36,31 @@ points = PoolVector2Array( -1, -5, 0, -6, 3, -6, 3, -3, -1, -3 )
 custom_solver_bias = 0.0
 extents = Vector2( 9, 12 )
 
-[node name="Player0" type="KinematicBody2D"]
+[sub_resource type="SpriteFrames" id=5]
+
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "Reload Radial",
+"speed": 20.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[node name="Player0" type="KinematicBody2D" index="0"]
 
 z_as_relative = false
 input_pickable = false
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 enabled = true
 control_m = 0
+print_events = false
 def_spd = 100
+speedModifier = 1
+reload_slow = 0.25
 gravity = 11.4
 jumpVel = 215.0
 ppos = 0
@@ -46,13 +68,14 @@ immune = false
 health = 100
 max_health = 100
 dead = false
-def_spt = ExtResource( 2 )
+dead_gun = ExtResource( 2 )
+def_spt = ExtResource( 3 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
 position = Vector2( 1.5, -1 )
-texture = ExtResource( 3 )
-script = ExtResource( 4 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Offset", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
@@ -100,10 +123,12 @@ scale = Vector2( 0.3, 0.125 )
 shape = SubResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="5"]
+[node name="ReloadRadial" type="AnimatedSprite" parent="." index="5"]
 
-position = Vector2( 0, -7 )
-animation = "default"
+position = Vector2( 1, -9 )
+frames = SubResource( 5 )
+animation = "Reload Radial"
+playing = true
 _sections_unfolded = [ "Visibility" ]
 
 [node name="ElementContainer" type="Node2D" parent="." index="6"]
@@ -113,16 +138,16 @@ _sections_unfolded = [ "Transform" ]
 [node name="BulletSource" type="Position2D" parent="ElementContainer" index="0"]
 
 position = Vector2( 6, -1 )
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 _sections_unfolded = [ "Transform" ]
 flash_offset = Vector2( 0, 0 )
-reload_s = 1.5
 chamber_dur = 0.12
 mag_max = 30
+reload_s = 1.5
 
 [node name="Flash" type="Sprite" parent="ElementContainer/BulletSource" index="0"]
 
 position = Vector2( 3, 0 )
-script = ExtResource( 6 )
+script = ExtResource( 15 )
 
 

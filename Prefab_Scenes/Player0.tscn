@@ -27,7 +27,7 @@ extents = Vector2( 9, 12 )
 custom_solver_bias = 0.0
 extents = Vector2( 2, 0.5 )
 
-[node name="Player0" type="KinematicBody2D" index="0"]
+[node name="Player0" type="KinematicBody2D"]
 
 z_as_relative = false
 input_pickable = false
@@ -38,6 +38,7 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 enabled = true
 control_m = 0
+print_events = false
 def_spd = 100
 gravity = 11.4
 jumpVel = 215.0

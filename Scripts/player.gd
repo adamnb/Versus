@@ -4,24 +4,35 @@ var windowSize = Vector2(ProjectSettings.get("display/window/width"), ProjectSet
 
 onready var spt       = get_node("sprite")   # Child sprite object
 onready var container = get_node("ElementContainer")
+onready var shooter   = container.get_node("BulletSource")
+onready var rld_anim  = $ReloadRadial
 
 # Control
-export var enabled     = true
-export var control_m   = 0 # control method
-var ctpf               = ["kb_", "gp_", "gp2_"] # list of prefixes for control methods
+export var enabled      = true
+export var control_m    = 0 # control method
+var ctpf                = ["kb_", "gp_", "gp2_"] # list of prefixes for control methods
+export var print_events = false
 
 # Kinematics
-var motion             = Vector2(0, 0)
+var motion               = Vector2(0, 0)
 # -> HORIZONTAL
-var direction          = 0 # Directional coefficient
-export var def_spd     = 1 # The default horizontal speed
-var speed              = 0
+var direction            = 0 # Directional coefficient
+export var def_spd       = 1 # The default horizontal speed
+export var speedModifier = 1
+export var reload_slow   = .25
+var speed                = 0
 
 # -> JUMPING
 export var gravity     = 0.1 # The acceleration per frame
 export var jumpVel     = 2.0 # Instantaneous velocity at jump
 var y_vel              = 0   # Current target vertical motion
 var grounded           = false
+
+# -> DASH
+var dashing            = false
+var dsh_dir
+var dsh_dur
+var dsh_vel
 
 # Status
 # -> HEALTH
@@ -33,6 +44,7 @@ export var max_health = 100
 
 export var dead       = false 
 
+export var dead_gun   = preload("res://Prefab_Scenes/DeadGun.tscn") # Gun dropped by player on death
 export var def_spt    = preload("res://Textures/Players/Soldier1212.png")
 
 func _ready():
@@ -52,6 +64,9 @@ func _ready():
 func _input (event):
 	if (event.is_action_pressed("kb_aux0")): # Extra button for debugging
 		hurt(20, direction, 1)
+		
+	if print_events:
+		print (event)
 
 var fframe = true
 func _physics_process(dT):
@@ -72,12 +87,11 @@ func _physics_process(dT):
 		
 		add_child(plr_indr)
 		plr_indr.position = Vector2(0, -12)
-		plr_indr.global_position.x = floor(plr_indr.global_position.x)
-		plr_indr.global_position.y = floor(plr_indr.global_position.y)
 		 
 		fframe = false
-		
-	if y - 5 > windowSize.y:
+
+
+	if y - 5 > windowSize.y: # Out of bounds (Fallen off map)
 		hurt(health, 0, 0) # Kill player
 		
 	motion.y += gravity
@@ -104,9 +118,20 @@ func _physics_process(dT):
 
 		motion.x = direction * def_spd #* dT # Final movement value
 
+	if shooter.reloading:
+		rld_anim.show()
+	else:
+		rld_anim.hide()
 
 	if health <= 0:
 		print ("[PLAYER] ", get_name(), " is fuckin' dead holy shit")
+		
+		var nD_gun = dead_gun.instance()
+		get_node("/root/World").add_child(nD_gun)
+		nD_gun.get_node("Sprite").modulate = spt.modulate
+		nD_gun.position = position
+		nD_gun.apply_impulse(nD_gun.position, Vector2(10, 1))
+		
 		get_parent().respawn(self)
 		queue_free()
 
@@ -121,8 +146,6 @@ func hurt(damage, dir, punch):
 	print ("[PLAYER] ", name, " took ", damage, " damage")
 	move_and_collide (Vector2(dir * punch, 0)) # Knockback
 
-	#spt = get_child(0) # I don't trust get_child() for this task, but find_node() seems to not work at all in this function
-
 	spt.blink(0.1) # Flash
 
 	health -= damage
@@ -132,14 +155,10 @@ func immunize (duration):
 	immune = true
 	imm_dur = duration
 
-
 # Colliders & Triggers
 func _on_Area2D_body_enter (body):
 	if body != self:
-		#y_vel = 0
 		grounded = true
-		print ("[PLAYER] ", get_name(), " is colliding with ", body.get_name())
-
 
 func _on_Area2D_body_exit (body):
 	grounded = false

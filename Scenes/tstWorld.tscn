@@ -40,11 +40,13 @@ inital_points = 5
 [node name="Bichael" parent="Players" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 17, 146 )
+print_events = false
 
 [node name="Bepis" parent="Players" index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 298, 145 )
 control_m = 1
+print_events = false
 
 [node name="CustomDraw" type="Node2D" parent="." index="2"]
 

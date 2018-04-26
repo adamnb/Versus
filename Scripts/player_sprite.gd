@@ -2,10 +2,10 @@ extends Sprite
 
 var def_spt
 var duration = 0.0
-var blink_spt = preload("res://Textures/soldier88flash.tex")
+var blink_spt = preload("res://Textures/soldier1212_flash.png")
 
 export(bool) var randomize_col = true
-export(bool) var random_alpha = false
+export(bool) var random_alpha = true
 
 var mod
 
@@ -26,7 +26,8 @@ func _ready():
 			a = rand_range(0, 1)
 			
 		mod = Color(r,g,b,a)
-
+	
+	print("[PLAYER SPRITE] Color: ", mod)
 	set("modulate", mod)
 		
 func _process(dT):
