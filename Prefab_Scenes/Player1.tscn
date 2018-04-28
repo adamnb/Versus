@@ -125,6 +125,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="ReloadRadial" type="AnimatedSprite" parent="." index="5"]
 
+visible = false
 position = Vector2( 1, -9 )
 frames = SubResource( 5 )
 animation = "Reload Radial"

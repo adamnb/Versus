@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Tilesets/1212Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/player_manager.gd" type="Script" id=2]
 [ext_resource path="res://Prefab_Scenes/Player1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Prefab_Scenes/DeadGun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Textures/Players/soldier1212_2.png" type="Texture" id=5]
-[ext_resource path="res://Scripts/simpleUI.gd" type="Script" id=6]
-[ext_resource path="res://Prefab_Scenes/Fonts/cour.fnt" type="BitmapFont" id=7]
-[ext_resource path="res://Prefab_Scenes/spawnpoint.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Textures/Players/soldier1212_2.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/simpleUI.gd" type="Script" id=5]
+[ext_resource path="res://Prefab_Scenes/Fonts/cour.fnt" type="BitmapFont" id=6]
+[ext_resource path="res://Prefab_Scenes/spawnpoint.tscn" type="PackedScene" id=7]
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -42,38 +41,36 @@ inital_points = 5
 [node name="The USSR" parent="Players" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 230, 115 )
-dead_gun = ExtResource( 4 )
 
 [node name="The USA" parent="Players" index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 21, 163 )
 control_m = 1
-dead_gun = ExtResource( 4 )
-def_spt = ExtResource( 5 )
+def_spt = ExtResource( 4 )
 
 [node name="Microcanvas" type="Node2D" parent="." index="2"]
 
 position = Vector2( 2, 0 )
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 show_fps = true
 height = -9
 width = 8
 x_offset = 5
 thickness = 1.0
-font = ExtResource( 7 )
+font = ExtResource( 6 )
 
-[node name="resp" parent="." index="3" instance=ExtResource( 8 )]
+[node name="resp" parent="." index="3" instance=ExtResource( 7 )]
 
 position = Vector2( 232, 110 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
-[node name="resp2" parent="." index="4" instance=ExtResource( 8 )]
+[node name="resp2" parent="." index="4" instance=ExtResource( 7 )]
 
 position = Vector2( 22, 158 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
-[node name="resp3" parent="." index="5" instance=ExtResource( 8 )]
+[node name="resp3" parent="." index="5" instance=ExtResource( 7 )]
 
 position = Vector2( 267, 158 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]

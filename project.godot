@@ -29,6 +29,8 @@ stdout/print_fps=false
 
 window/size/width=324
 window/size/height=192
+window/size/test_width=1920
+window/size/test_height=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 stretch/aspect="keep"
