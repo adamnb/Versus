@@ -23,7 +23,7 @@ extents = Vector2( 1, 1.5 )
 custom_solver_bias = 0.0
 extents = Vector2( 1, 1.5 )
 
-[node name="World" type="Node" index="0"]
+[node name="World" type="Node"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 

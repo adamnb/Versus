@@ -5,11 +5,11 @@ var windowSize = Vector2(ProjectSettings.get("display/window/width"), ProjectSet
 onready var spt       = get_node("sprite")   # Child sprite object
 onready var container = get_node("ElementContainer")
 onready var shooter   = container.get_node("BulletSource")
-onready var rld_anim  = $ReloadRadial
+onready var rld_anim  = $ReloadRadial # Animated reload indidcator
 
 # Control
-export var enabled      = true
-export var control_m    = 0 # control method
+export var enabled      = true # Does the player have control?
+export var control_m    = 0 # control method [0: keyboard, 1: gamepad, 2: second gamepad(untested)]
 var ctpf                = ["kb_", "gp_", "gp2_"] # list of prefixes for control methods
 export var print_events = false
 
@@ -18,9 +18,8 @@ var motion               = Vector2(0, 0)
 # -> HORIZONTAL
 var direction            = 0 # Directional coefficient
 export var def_spd       = 1 # The default horizontal speed
-export var speedModifier = 1
-export var reload_slow   = .25
-var speed                = 0
+export var reload_slow   = .25 # Speed multiplier on reload
+var speed                = 0 
 
 # -> JUMPING
 export var gravity     = 0.1 # The acceleration per frame
@@ -47,6 +46,8 @@ export var dead       = false
 export var dead_gun   = preload("res://Prefab_Scenes/DeadGun.tscn") # Gun dropped by player on death
 export var def_spt    = preload("res://Textures/Players/Soldier1212.png")
 
+
+
 func _ready():
 	set_physics_process(true)
 	set_process_input(true)
@@ -61,12 +62,15 @@ func _ready():
 	health = max_health
 
 
+
 func _input (event):
 	if (event.is_action_pressed("kb_aux0")): # Extra button for debugging
 		hurt(20, direction, 1)
 		
 	if print_events:
 		print (event)
+
+
 
 var fframe = true
 func _physics_process(dT):
@@ -75,7 +79,9 @@ func _physics_process(dT):
 	var x = position.x
 	var y = position.y
 
-	if fframe:
+	if fframe: # Only run on first frame
+	
+		# Show player lobby positions "P1, P2, P3 etc.."
 		print ("[PLAYER] ", get_name(), " is player ", ppos)
 		
 		var plr_indr
@@ -101,16 +107,17 @@ func _physics_process(dT):
 		#HORIZONTAL KINEMATICS
 		if (Input.is_action_pressed(str(ctpf[control_m]) + "left")):
 			direction = -1 
-			container.scale = Vector2(-1, 1) 
+			container.scale = Vector2(-1, 1) # Flip only objects in container where direction matters
 			spt.flip_h = true
 
 		elif (Input.is_action_pressed(str(ctpf[control_m]) + "right")):
 			direction = 1
-			container.scale = Vector2(1, 1)
+			container.scale = Vector2(1, 1) # Flip only objects in container where direction matters
 			spt.flip_h = false
 
 		else: 
-			direction = 0
+			direction = 0 # This is only movement direction
+
 
 		if (Input.is_action_pressed(str(ctpf[control_m]) + "jump")):
 			if grounded:
@@ -118,6 +125,7 @@ func _physics_process(dT):
 
 		motion.x = direction * def_spd #* dT # Final movement value
 
+	# Reload indicator
 	if shooter.reloading:
 		rld_anim.show()
 	else:
@@ -126,24 +134,28 @@ func _physics_process(dT):
 	if health <= 0:
 		print ("[PLAYER] ", get_name(), " is fuckin' dead holy shit")
 		
+		# Drop gun
 		var nD_gun = dead_gun.instance()
 		get_node("/root/World").add_child(nD_gun)
-		nD_gun.get_node("Sprite").modulate = spt.modulate
-		nD_gun.position = position
-		nD_gun.apply_impulse(nD_gun.position, Vector2(10, 1))
+		nD_gun.get_node("Sprite").modulate = spt.mod # Set gun color to the color of the player
+		nD_gun.position = position 
 		
 		get_parent().respawn(self)
-		queue_free()
+		queue_free() # Destroy self
 
-
-	if immune:
-		imm_dur -= dT
+# THIS DOESN'T WORK YET. PLEASE DON'T LOOK.
+#	if immune:
+#		imm_dur -= dT
+#		if imm_dur <= 0:
+#			immune = false
+#			print ("[PLAYER] ", get_name, " can now be hurt.")
 
 	motion = move_and_slide(motion) # The normal move() function would create too much friction
 
+
 # PAIN AND SUFFERING
 func hurt(damage, dir, punch):
-	print ("[PLAYER] ", name, " took ", damage, " damage")
+	#print ("[PLAYER] ", name, " took ", damage, " damage")
 	move_and_collide (Vector2(dir * punch, 0)) # Knockback
 
 	spt.blink(0.1) # Flash
@@ -151,14 +163,19 @@ func hurt(damage, dir, punch):
 	health -= damage
 
 
-func immunize (duration):
-	immune = true
-	imm_dur = duration
+# THIS DOESN'T WORK YET, PLEASE DON'T LOOK.
+#func immunize (duration):
+#	immune = true
+#	imm_dur = duration
+#	print ("[PLAYER] ", get_name(), " is immune for ", duration, " seconds.")
+
 
 # Colliders & Triggers
 func _on_Area2D_body_enter (body):
 	if body != self:
 		grounded = true
+
+
 
 func _on_Area2D_body_exit (body):
 	grounded = false

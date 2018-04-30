@@ -16,8 +16,8 @@ export(int) var mag_max = 30 # Maximum ammo that can be stored in a magazine
 export var reload_s     = 1.5 # How long it takes for the player to reload (s) 
 var cur_ammo
 var reloading = false
-var cur_rl_t  = 0
-var cur_t     = 0
+var cur_rl_t  = 0 # Elapsed time since reload call
+var cur_t     = 0 # Elipsed time since gun fired
 
 func _ready():
 	set_process_input(true)
@@ -26,21 +26,26 @@ func _ready():
 	cur_ammo = mag_max
 
 func _input(event):
-#	if (event.is_action_pressed(str(ctpf[control_m]) + "reload")):
-#		reload()
-	pass
-	
+	if (cur_ammo < mag_max):
+		if (event.is_action_pressed(str(ctpf[control_m]) + "reload")):
+			reloading = true
+
+
+
 func _process(dT):
 	var p_dir = get_parent().get_parent().direction # The parent's movement direction (-1, 0, 1)
 
+	# "dir = p_dir" makes it so when the player isn't moving, it aims nowhere, and will fire a bullet with no direction
 	if p_dir == -1:
 		dir = -1
 	if p_dir == 1:
 		dir = 1
 
+	# Reset muzzleflash sprite
 	if flash_spt:
 		flash_spt.set_texture(null)
-	
+
+
 	if cur_ammo > 0:
 		if (cur_t <= 0): # Chambered
 			if (Input.is_action_pressed(str(ctpf[control_m]) + "fire")):
@@ -58,15 +63,23 @@ func _process(dT):
 				cur_t = chamber_dur
 
 	else:
-		reload(dT)
-
+		reloading = true
+		
+	if (cur_ammo < mag_max):
+		if (Input.is_action_pressed(str(ctpf[control_m]) + "reload")):
+			reloading = true
+	
 	if cur_t > 0:
 		cur_t -= dT
 	else:
 		cur_t = 0
-		
+
+	if reloading:
+		reload(dT)
+
+
+
 func reload (delta):
-	reloading = true
 	cur_rl_t += delta
 
 	if cur_rl_t > reload_s:
