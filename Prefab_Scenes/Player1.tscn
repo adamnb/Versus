@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://Prefab_Scenes/DeadGun.tscn" type="PackedScene" id=2]
@@ -14,7 +14,8 @@
 [ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW6.png" type="Texture" id=12]
 [ext_resource path="res://Textures/Animations/ReloadRadial/reloadRadialCW7.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/shooter.gd" type="Script" id=14]
-[ext_resource path="res://Scripts/flash.gd" type="Script" id=15]
+[ext_resource path="res://Textures/Effects/gunflash0.tex" type="Texture" id=15]
+[ext_resource path="res://Scripts/flash.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -59,7 +60,6 @@ enabled = true
 control_m = 0
 print_events = false
 def_spd = 100
-speedModifier = 1
 reload_slow = 0.25
 gravity = 11.4
 jumpVel = 215.0
@@ -113,9 +113,11 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_layer = 2
+collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grounder" index="0"]
 
@@ -129,6 +131,7 @@ visible = false
 position = Vector2( 1, -9 )
 frames = SubResource( 5 )
 animation = "Reload Radial"
+frame = 3
 playing = true
 _sections_unfolded = [ "Visibility" ]
 
@@ -140,15 +143,22 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( 6, -1 )
 script = ExtResource( 14 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 flash_offset = Vector2( 0, 0 )
 chamber_dur = 0.12
-mag_max = 30
+mag_max = 25
 reload_s = 1.5
 
 [node name="Flash" type="Sprite" parent="ElementContainer/BulletSource" index="0"]
 
-position = Vector2( 3, 0 )
-script = ExtResource( 15 )
+position = Vector2( 2, 0 )
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Z Index" ]
+
+[node name="MagDropper" type="Position2D" parent="ElementContainer" index="1"]
+
+position = Vector2( 2.5, -0.5 )
+_sections_unfolded = [ "Transform" ]
 
 

@@ -1,4 +1,4 @@
-extends KinematicBody2D
+	extends KinematicBody2D
 
 var windowSize = Vector2(ProjectSettings.get("display/window/width"), ProjectSettings.get("display/window/height"))
 
@@ -10,7 +10,7 @@ onready var rld_anim  = $ReloadRadial # Animated reload indidcator
 # Control
 export var enabled      = true # Does the player have control?
 export var control_m    = 0 # control method [0: keyboard, 1: gamepad, 2: second gamepad(untested)]
-var ctpf                = ["kb_", "gp_", "gp2_"] # list of prefixes for control methods
+var ctpf                = ["kb_", "gp_", "gp2_", "kb2_"] # list of prefixes for control methods
 export var print_events = false
 
 # Kinematics
@@ -122,6 +122,9 @@ func _physics_process(dT):
 		if (Input.is_action_pressed(str(ctpf[control_m]) + "jump")):
 			if grounded:
 				motion.y = -jumpVel
+				
+			else:
+				print ("[PLAYER] ", get_name(), " tried to jump but wasn't grounded.")
 
 		motion.x = direction * def_spd #* dT # Final movement value
 
@@ -174,7 +177,6 @@ func hurt(damage, dir, punch):
 func _on_Area2D_body_enter (body):
 	if body != self:
 		grounded = true
-
 
 
 func _on_Area2D_body_exit (body):

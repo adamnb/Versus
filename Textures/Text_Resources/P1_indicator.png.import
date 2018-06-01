@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/P2_inicator.png-f1818f65c12b7b08348bb32f77ef924d.stex"
+path="res://.import/P1_indicator.png-8f43d6ce924a94d1ac8beefb61f5845d.stex"
 
 [deps]
 
-source_file="res://Textures/Text_Resources/P2_inicator.png"
-source_md5="8f4523fd9d38cafff39e7c55529c2969"
+source_file="res://Textures/Text_Resources/P1_indicator.png"
+source_md5="9223e169c18abd4645af3f857141fc6d"
 
-dest_files=[ "res://.import/P2_inicator.png-f1818f65c12b7b08348bb32f77ef924d.stex" ]
-dest_md5="55941c294cf94da22c65d1e76950a854"
+dest_files=[ "res://.import/P1_indicator.png-8f43d6ce924a94d1ac8beefb61f5845d.stex" ]
+dest_md5="0495f6c4d07a473bbe5533c3fc28cc6b"
 
 [params]
 

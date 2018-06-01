@@ -12,7 +12,6 @@
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
-position = Vector2( 0.183777, 0 )
 mode = 0
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 12, 12 )
@@ -45,7 +44,7 @@ position = Vector2( 230, 115 )
 [node name="The USA" parent="Players" index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 21, 163 )
-control_m = 1
+control_m = 3
 def_spt = ExtResource( 4 )
 
 [node name="Microcanvas" type="Node2D" parent="." index="2"]

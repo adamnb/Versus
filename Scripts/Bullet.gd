@@ -24,7 +24,7 @@ func _physics_process(dT):
 
 	move_and_collide(Vector2(dir*speed, 0))
 
-	if x <= 0 || x > res.x || y < 0 || y > res.y: # Out of bounds
+	if x <= 0 || x > res.x || y < 0 || y > res.y: # Out of bounds DELET THIS BECAUSE YOU WON'T BE ABLE TO MAKE BIGGER MAPS
 		queue_free()
 
 func _on_body_enter (body):

@@ -1,11 +1,14 @@
 extends Position2D
 
+onready var mag_dropper = get_parent().find_node("MagDropper")
+
 onready var flash_spt   = find_node("Flash")
 export var flash_offset = Vector2(0, 0)
 
 var proj = preload("res://Prefab_Scenes/Bullet.tscn") # Projectile prefab
 var dir  = 1 # Firing direction (-1, 1)
 
+var magazine = preload ("res://Prefab_Scenes/Magazine.tscn")
 
 onready var control_m = get_parent().get_parent().control_m  # Control mode of player
 onready var ctpf      = get_parent().get_parent().ctpf       # Control prefixes
@@ -52,14 +55,13 @@ func _process(dT):
 
 				var nShot = proj.instance() # Create clone instance
 				get_node("/root/World").add_child(nShot) # Add to tree
-				nShot.get_child(0).position = global_position # Reposition
 
+				nShot.get_child(0).position = global_position # Reposition
 				nShot.get_child(0).dir = dir # Movement dir
-				
-				cur_ammo -= 1
 
 				flash_spt.flash(0.05) # Muzzle flash
 
+				cur_ammo -= 1
 				cur_t = chamber_dur
 
 	else:
@@ -78,11 +80,25 @@ func _process(dT):
 		reload(dT)
 
 
-
+var ff = true
 func reload (delta):
 	cur_rl_t += delta
+	
+	if ff:
+		magdrop(magazine, Vector2(dir*60, 50))
+		ff = false
 
 	if cur_rl_t > reload_s:
 		cur_ammo = mag_max
 		cur_rl_t = 0
 		reloading = false
+		ff = true
+
+func magdrop (mag, force):
+	print ("[SHOOTER] Magazine dropped")
+	
+	var nMag = magazine.instance()
+	get_node("/root/World").add_child(nMag)
+	nMag.position = mag_dropper.global_position
+	nMag.apply_impulse(Vector2(0,0), force)
+	
